@@ -72,6 +72,17 @@ Each decision tree is trained using a subset of the training data and a random s
 The main advantage of using a random forest regressor is that it can handle a large number of input features and can automatically select the most important features for making the predictions. 
 
 ### Hyperparameter
+In the parameter grid for Random Forest Model, we have defined a set of hyperparameters and their corresponding values to be tuned during the training process. Here's what each hyperparameter means:
+
+* n_estimators: The number of trees in the forest. In this case, we are trying values 100, 150, and 200.  
+* max_depth: The maximum depth of each tree in the forest. The higher the depth, the more complex the model will be. In this case, we are trying values 20, 30, 50, and 80.
+* max_features: The maximum number of features to consider when looking for the best split. A lower value can reduce overfitting, while a higher value can increase model performance. In this case, we are trying values 0.3, 0.6, and 0.8.
+* min_samples_leaf: The minimum number of samples required to be at a leaf node. This can be used to control overfitting. In this case, we are trying values 1, 5, 8, and 10.
+* The algo__ prefix in each parameter is used to indicate that the hyperparameters belong to the RandomForestRegressor algorithm, which is being used in a scikit-learn Pipeline object. This prefix is added to avoid any naming conflicts with other hyperparameters that may be present in the Pipeline object.
+
+We tune the model using GridSearchCV, one of the tool in hyperparameter tuning besides randomizedsearchcv, using the parameter defined as random_grid, 5 times cross validation and with the scoring Mean Absolute Percentage Error (MAPE).  
+
+After we tuned the random forest model, the performance is increased around 0.1%. It is not that significant but still important to notice that our model has improved.
 
 ## Conclusion
 Our analysis involved several key steps in preparing the data and developing the machine learning model. Firstly, we performed data preprocessing to prepare the data for analysis. We transformed the continuous numerical variables using Robust Scaler to minimize the influence of outliers, while the categorical variables were encoded using One Hot Encoding and Binary Encoding to convert them into numerical variables that the model could interpret.
